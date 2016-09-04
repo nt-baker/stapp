@@ -6,3 +6,37 @@ app.set('port', process.env.PORT || 3000);
 var server = app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + server.address().port);
 });
+
+// Get DB Connection Info
+var dbConnString = process.env.MYSQLCONNSTR_localdb;
+var connectstr_dbhost = dbConnString.replace(/^.*Data Source=(.+?);.*$/i, '\$1');
+var connectstr_dbname = dbConnString.replace(/^.*Database=(.+?);.*$/i, '\$1');
+var connectstr_dbusername = dbConnString.replace(/^.*User Id=(.+?);.*$/i, '\$1');
+var connectstr_dbpassword = dbConnString.replace(/^.*Password=(.+?)$/i, '\$1');
+
+// Connect to DB
+var db = require('node-mysql');
+var DB = db.DB;
+var BaseRow = db.Row;
+var BaseTable = db.Table;
+
+var box = new DB({
+    host     : connectstr_dbhost,
+    user     : connectstr_dbusername,
+    password : connectstr_dbpassword,
+    database : connectstr_dbname
+});
+
+var basicTest = function(cb) {
+    box.connect(function(conn, cb) {
+        cps.seq([
+            function(_, cb) {
+                conn.query('select * from users limit 1', cb);
+            },
+            function(res, cb) {
+                console.log(res);
+                cb();
+            }
+        ], cb);
+    }, cb);
+};
