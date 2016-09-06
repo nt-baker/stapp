@@ -6,6 +6,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var db = require('mysql');
 
 var routes = require('./routes/index');
 var users = require('./routes/user');
@@ -67,5 +68,12 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
 module.exports = app;
+
+var sqlConn = db.createConnection({
+    host     : '127.0.0.1',
+    port     : '50760',
+    user     : connectstr_dbusername,
+    password : connectstr_dbpassword,
+    database : connectstr_dbname
+});
