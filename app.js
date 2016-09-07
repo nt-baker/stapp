@@ -20,13 +20,16 @@ var connectstr_dbname = dbConnString.replace(/^.*Database=(.+?);.*$/i, '\$1');
 var connectstr_dbusername = dbConnString.replace(/^.*User Id=(.+?);.*$/i, '\$1');
 var connectstr_dbpassword = dbConnString.replace(/^.*Password=(.+?)$/i, '\$1');
 
-app.locals.sqlConn = db.createConnection({
+var sqlConn = db.createConnection({
     host     : '127.0.0.1',
     port     : '50760',
     user     : connectstr_dbusername,
     password : connectstr_dbpassword,
     database : connectstr_dbname
 });
+
+app.locals.teams = getTeams(sqlConn);
+console.log("teams: " + app.locals.teams);
 
 var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
@@ -84,3 +87,21 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+function getTeams(conn) {
+    console.log("provided conn: " + conn.config.host);
+    var teams = [];
+    conn.connect();
+      conn.query('SELECT name FROM team', function(err, rows, fields) {
+        if (err) throw err;
+
+        for (var i = 0, len = rows.length; i < len; i++) {
+          teams.push(rows[i].name);
+        }
+        console.log("returning teams inside: " + teams);
+      });
+    conn.end();
+    console.log("returning teams: " + teams);
+    return teams;
+}
