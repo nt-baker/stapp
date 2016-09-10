@@ -28,8 +28,8 @@ var sqlConn = db.createConnection({
     database : connectstr_dbname
 });
 
-app.locals.teams = getTeams(sqlConn);
-console.log("teams: " + app.locals.teams);
+//app.locals.teams = getTeams(sqlConn);
+//console.log("teams: " + app.locals.teams);
 
 var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
@@ -86,10 +86,12 @@ app.use(function(err, req, res, next) {
     });
 });
 
-module.exports = app;
+function setTeams(teams){
+  console.log("set teams: " + teams);
+  app.locals.teams = teams;
+}
 
-
-function getTeams(conn) {
+function getTeams(conn, callback) {
     console.log("provided conn: " + conn.config.host);
     var teams = [];
     conn.connect();
@@ -99,9 +101,10 @@ function getTeams(conn) {
         for (var i = 0, len = rows.length; i < len; i++) {
           teams.push(rows[i].name);
         }
+        callback(teams);
         console.log("returning teams inside: " + teams);
       });
-    conn.end();
-    console.log("returning teams: " + teams);
-    return teams;
+    //conn.end();
 }
+
+module.exports = app;
