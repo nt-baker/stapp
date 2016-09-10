@@ -28,7 +28,7 @@ var sqlConn = db.createConnection({
     database : connectstr_dbname
 });
 
-//app.locals.teams = getTeams(sqlConn);
+getTeams(sqlConn, setTeams);
 //console.log("teams: " + app.locals.teams);
 
 var env = process.env.NODE_ENV || 'development';
@@ -102,9 +102,8 @@ function getTeams(conn, callback) {
           teams.push(rows[i].name);
         }
         callback(teams);
-        console.log("returning teams inside: " + teams);
       });
-    //conn.end();
+    conn.end();
 }
 
 module.exports = app;
