@@ -4,9 +4,13 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res) {
 
-  res.render('index', {
-    title: 'Scott Stapp Memorial Survivor Pickem',
-    teams: req.app.locals.teams
+  req.app.locals.getTeams(function(){
+
+    res.render('index', {
+      title: 'Scott Stapp Memorial Survivor Pickem',
+      teams: req.app.locals.teams
+    });
+
   });
 
 });
