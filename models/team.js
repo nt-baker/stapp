@@ -1,5 +1,4 @@
 var db = require('../db.js');
-console.log(db);
 
 function Team(location, name) {
   this.location = location;
@@ -7,13 +6,13 @@ function Team(location, name) {
 }
 
 exports.getTeams = function(callback){
-  db.getConn().query('', function(err, rows){
+  db.getConn().query('SELECT location, name FROM team', function(err, rows){
     if(err)
       return callback(err);
     else {
       var teams = [];
       for(var i = 0; i < rows.length; i++){
-        teams.push(new Team(row[i].location, row[i].name));
+        teams.push(new Team(rows[i].location, rows[i].name));
       }
       callback(null, teams);
     }

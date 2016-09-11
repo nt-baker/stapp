@@ -35,23 +35,3 @@ INSERT INTO `Team` (`Location`, `Name`) VALUES ('San Diego', 'Chargers');
 INSERT INTO `game` (`GameId`, `HomeTeamId`, `AwayTeamId`, `WinTeamId`, `Week`, `Kickoff`)
 VALUES (NULL, '7', '23', '0', '1', '2016-09-08 08:30:00'),
       (NULL, '8', '1', '0', '1', '2016-09-11 13:00:00');
-
-
---Create teams
-CREATE TABLE `team` (
- `TeamId` int(11) NOT NULL AUTO_INCREMENT,
- `Location` varchar(50) NOT NULL,
- `Name` varchar(50) NOT NULL,
- PRIMARY KEY (`TeamId`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1
-
---Create game
-CREATE TABLE `game` (
- `GameId` int(11) NOT NULL AUTO_INCREMENT,
- `HomeTeamId` int(11) NOT NULL,
- `AwayTeamId` int(11) NOT NULL,
- `WinTeamId` int(11) NOT NULL,
- `Week` int(11) NOT NULL,
- `Kickoff` datetime NOT NULL,
- PRIMARY KEY (`GameId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1
