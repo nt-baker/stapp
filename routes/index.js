@@ -6,10 +6,11 @@ var team = require('../models/team.js');
 router.get('/', function(req, res) {
 
   team.getTeams(function(err, teams){
-    
+
     res.render('index', {
       title: 'Scott Stapp Memorial Survivor Pickem',
-      teams: teams
+      teams: teams,
+      currentWeek: app.locals.currentWeek
     });
 
   });

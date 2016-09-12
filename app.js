@@ -13,27 +13,11 @@ var users = require('./routes/user');
 
 var app = express();
 
-// Get DB Connection Info
-// var dbConnString = process.env.MYSQLCONNSTR_localdb;
-// var connectstr_dbhost = dbConnString.replace(/^.*Data Source=(.+?);.*$/i, '\$1');
-// var connectstr_dbname = dbConnString.replace(/^.*Database=(.+?);.*$/i, '\$1');
-// var connectstr_dbusername = dbConnString.replace(/^.*User Id=(.+?);.*$/i, '\$1');
-// var connectstr_dbpassword = dbConnString.replace(/^.*Password=(.+?)$/i, '\$1');
-
-// var sqlConn = db.createConnection({
-//     host     : '127.0.0.1',
-//     port     : '50760',
-//     user     : connectstr_dbusername,
-//     password : connectstr_dbpassword,
-//     database : connectstr_dbname
-// });
-
 var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
 
 // view engine setup
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -69,7 +53,6 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
@@ -92,30 +75,65 @@ app.use(function(err, req, res, next) {
     });
 });
 
-// app.locals.getTeams = function(callback){
-//   dbGetTeams(sqlConn, setTeams, callback);
-// };
-//
-// function setTeams(teams, callback){
-//   console.log("set teams: " + teams);
-//   app.locals.teams = teams;
-//   callback();
-// }
-//
-// function dbGetTeams(conn, callback, notify) {
-//     console.log("provided conn: " + conn.config.host);
-//     var teams = [];
-//     conn.connect();
-//       conn.query('SELECT name FROM team', function(err, rows, fields) {
-//         if (err) throw err;
-//         console.log("rows length:" + rows.length);
-//         console.log("rows:" + rows);
-//         for (var i = 0, len = rows.length; i < len; i++) {
-//           teams.push(rows[i].name);
-//         }
-//         callback(teams, notify);
-//       });
-//     conn.end();
-// }
+app.locals.currentWeek = getCurrentWeek();
+
+function getCurrentWeek(){
+
+  var today = Date.now();
+  if (today <= new Date('2016-09-12')){
+    return 1;
+  }
+  else if (today <= new Date('2016-09-19')){
+    return 2;
+  }
+  else if (today <= new Date('2016-09-26')){
+    return 3;
+  }
+  else if (today <= new Date('2016-10-03')){
+    return 4;
+  }
+  else if (today <= new Date('2016-10-10')){
+    return 5;
+  }
+  else if (today <= new Date('2016-10-17')){
+    return 6;
+  }
+  else if (today <= new Date('2016-10-24')){
+    return 7;
+  }
+  else if (today <= new Date('2016-10-31')){
+    return 8;
+  }
+  else if (today <= new Date('2016-11-07')){
+    return 9;
+  }
+  else if (today <= new Date('2016-11-14')){
+    return 10;
+  }
+  else if (today <= new Date('2016-11-21')){
+    return 11;
+  }
+  else if (today <= new Date('2016-11-28')){
+    return 12;
+  }
+  else if (today <= new Date('2016-12-05')){
+    return 13;
+  }
+  else if (today <= new Date('2016-12-12')){
+    return 14;
+  }
+  else if (today <= new Date('2016-12-19')){
+    return 15;
+  }
+  else if (today <= new Date('2016-12-26')){
+    return 16;
+  }
+  else if (today <= new Date('2017-01-01')){
+    return 17;
+  }
+  else {
+    return 0;
+  }
+}
 
 module.exports = app;
