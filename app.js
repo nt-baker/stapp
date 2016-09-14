@@ -79,7 +79,12 @@ app.locals.currentWeek = getCurrentWeek();
 
 function getCurrentWeek(){
 
-  var today = Date.now();
+  var utcNow = new Date();
+  var dstEnd = new Date('2016-11-06').setHours(2);
+  var offset = utcNow < dstEnd ? 4 : 5;
+  var easternNow = utcNow = utcNow.setHours(utcNow.getHours() - offset);
+  var today = new Date(easternNow);
+
   if (today <= new Date('2016-09-12')){
     return 1;
   }
