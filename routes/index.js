@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
     res.render('index', {
       title: 'Scott Stapp Memorial Survivor Pickem',
       teams: teams,
-      currentWeek: app.locals.currentWeek
+      currentWeek: req.app.locals.currentWeek
     });
 
   });

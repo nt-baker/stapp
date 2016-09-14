@@ -9,10 +9,9 @@ function Pick(userId, gameId, teamId, location, name) {
 
 exports.getAllPicks = function(callback){
 
-  var query = 'SELECT p.PickId, p.GameId t.TeamId, t.Location, t.Name, u.UserId '
+  var query = 'SELECT p.PickId, p.GameId t.TeamId, t.Location, t.Name, p.UserId '
             + 'FROM pick p '
             + 'INNER JOIN team t ON p.TeamId = t.TeamId '
-            + 'INNER JOIN userpick u ON p.PickId = u.PickId';
 
   db.getConn().query(query, function(err, rows){
     if(err)
@@ -30,11 +29,10 @@ exports.getAllPicks = function(callback){
 
 exports.getUserPicks = function(userId, callback){
 
-  var query = 'SELECT p.PickId, p.GameId t.TeamId, t.Location, t.Name, u.UserId '
+  var query = 'SELECT p.PickId, p.UserId, p.GameId t.TeamId, t.Location, t.Name '
             + 'FROM pick p '
             + 'INNER JOIN team t ON p.TeamId = t.TeamId '
-            + 'INNER JOIN userpick u ON p.PickId = u.PickId'
-            + 'WHERE u.UserId =' + userId;
+            + 'WHERE p.UserId =' + userId;
 
   db.getConn().query(query, function(err, rows){
     if(err)

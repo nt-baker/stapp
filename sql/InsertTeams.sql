@@ -31,7 +31,60 @@ INSERT INTO `Team` (`Location`, `Name`) VALUES ('Houston', 'Texans');
 INSERT INTO `Team` (`Location`, `Name`) VALUES ('Seattle', 'Seahawks');
 INSERT INTO `Team` (`Location`, `Name`) VALUES ('San Diego', 'Chargers');
 
--- GAMES
+-- WEEK 1 GAMES
 INSERT INTO `game` (`GameId`, `HomeTeamId`, `AwayTeamId`, `WinTeamId`, `Week`, `Kickoff`)
-VALUES (NULL, '7', '23', '0', '1', '2016-09-08 08:30:00'),
-      (NULL, '8', '1', '0', '1', '2016-09-11 13:00:00');
+VALUES (NULL, '8', '1', '1', '1', '2016-09-11'),
+  (NULL, '13', '5', '5', '1', '2016-09-11'),
+  (NULL, '6', '4', '6', '1', '2016-09-12'),
+  (NULL, '7', '23', '7', '1', '2016-09-08'),
+  (NULL, '31', '9', '31', '1', '2016-09-11'),
+  (NULL, '2', '10', '10', '1', '2016-09-11'),
+  (NULL, '30', '11', '30', '1', '2016-09-11'),
+  (NULL, '3', '16', '16', '1', '2016-09-11'),
+  (NULL, '12', '17', '17', '1', '2016-09-11'),
+  (NULL, '28', '18', '18', '1', '2016-09-11'),
+  (NULL, '19', '32', '19', '1', '2016-09-11'),
+  (NULL, '29', '20', '20', '1', '2016-09-11'),
+  (NULL, '14', '22', '14', '1', '2016-09-11'),
+  (NULL, '21', '24', '24', '1', '2016-09-11'),
+  (NULL, '26', '25', '25', '1', '2016-09-11'),
+  (NULL, '15', '27', '27', '1', '2016-09-12');
+
+
+-- PICKS
+INSERT INTO `pick` (`PickId`, `UserId`, `TeamId`, `GameId`, `UserStreak`, `PickTimeEst`)
+VALUES (NULL, '3', '30', '9', '0', '2016-09-07 00:00:00'),
+  (NULL, '4', '31', '7', '0', '2016-09-07 00:00:00'),
+  (NULL, '5', '26', '17', '0', '2016-09-07 00:00:00'),
+  (NULL, '6', '30', '9', '0', '2016-09-07 00:00:00'),
+  (NULL, '7', '30', '9', '0', '2016-09-07 00:00:00'),
+  (NULL, '8', '31', '7', '0', '2016-09-07 00:00:00'),
+  (NULL, '9', '30', '9', '0', '2016-09-07 00:00:00'),
+  (NULL, '10', '1', '3', '0', '2016-09-07 00:00:00'),
+  (NULL, '11', '19', '13', '0', '2016-09-07 00:00:00'),
+  (NULL, '12', '12', '11', '0', '2016-09-07 00:00:00'),
+  (NULL, '13', '2', '8', '0', '2016-09-07 00:00:00'),
+  (NULL, '14', '12', '11', '0', '2016-09-07 00:00:00'),
+  (NULL, '15', '25', '17', '0', '2016-09-07 00:00:00'),
+  (NULL, '16', '3', '10', '0', '2016-09-07 00:00:00'),
+  (NULL, '17', '28', '12', '0', '2016-09-07 00:00:00');
+
+
+
+-- USERS
+INSERT INTO `user` (`UserId`, `Name`, `Password`, `CurrentStreak`, `Email`)
+VALUES (NULL, 'John', 'wideopen', '1', 'test@test.com'),
+  (NULL, 'Josh', 'wideopen', '1', 'test@test.com'),
+  (NULL, 'Peter', 'wideopen', '1', 'test@test.com'),
+  (NULL, 'Ryan', 'wideopen', '1', 'test@test.com'),
+  (NULL, 'Shawn', 'wideopen', '1', 'test@test.com'),
+  (NULL, 'Jake', 'wideopen', '1', 'test@test.com'),
+  (NULL, 'Durban', 'wideopen', '1', 'test@test.com'),
+  (NULL, 'Tom', 'wideopen', '1', 'test@test.com'),
+  (NULL, 'Lauren', 'wideopen', '1', 'test@test.com'),
+  (NULL, 'Brad', 'wideopen', '0', 'test@test.com'),
+  (NULL, 'Connie', 'wideopen', '0', 'test@test.com'),
+  (NULL, 'Sam', 'wideopen', '0', 'test@test.com'),
+  (NULL, 'Kyle', 'wideopen', '0', 'test@test.com'),
+  (NULL, 'Scott', 'wideopen', '0', 'test@test.com'),
+  (NULL, 'Tyler', 'wideopen', '0', 'test@test.com');
