@@ -8,7 +8,8 @@ INNER JOIN game g ON p.GameId = g.GameId
 INNER JOIN team t on p.TeamId = t.TeamId;
 
 -- Correct picks for specific user
-SELECT u.Name, g.Week, t.Name, t.TeamId, g.GameId, p.UserStreak
+-- Rowcount + BonusPoints will be total points for user
+SELECT u.Name, g.Week, t.Name, t.TeamId, g.GameId, p.UserStreak, SUM(p.UserStreak) as BonusPoints
 FROM `user` u
 INNER JOIN pick p ON u.UserId = p.PickId
 INNER JOIN game g ON p.GameId = g.GameId

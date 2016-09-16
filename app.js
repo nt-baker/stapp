@@ -10,6 +10,7 @@ var db = require('./db.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/user');
+var login = require('./routes/login');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/login', login);
 
 db.connect(function(err){
   if(err){

@@ -1,4 +1,5 @@
 var db = require('../db.js');
+var pick = require('pick.js');
 
 function User(userId, email, name, currentStreak) {
   this.teamId = userId;
@@ -19,4 +20,19 @@ exports.getUsers = function(callback){
       callback(null, teams);
     }
   });
+}
+
+exports.getTotalPoints = function(userId, callback){
+  pick.getUserCorrectPicks(userId, calculateTotal);
+}
+
+function calculateTotal(err, results){
+  if (err || results == null){
+    console.log("Error: " + err);
+    return 0;
+  }
+
+  var points = results.length;
+  var bonusPoints = results[0].BonusPoints;
+  return points + bonusPoints;
 }
